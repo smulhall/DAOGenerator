@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.greenrobot.daogenerator.gentest;
+
 
 import de.greenrobot.daogenerator.DaoGenerator;
 import de.greenrobot.daogenerator.Entity;
@@ -35,11 +35,12 @@ public class ExampleDaoGenerator {
 
         addAssignment(schema);
 
-        new DaoGenerator().generateAll(schema, "../DaoExample/src-gen");
+        new DaoGenerator().generateAll(schema, "/home/stephen/git/DAOGenerator/DaoExampleGenerator/src-gen");
     }
 
     private static void addAssignment(Schema schema) {
         Entity assignment = schema.addEntity("Assignment");
+        assignment.implementsInterface("Serializable");
         assignment.addIdProperty();
         assignment.addStringProperty("assignment_id");
         assignment.addStringProperty("time_slot_start");
@@ -49,6 +50,7 @@ public class ExampleDaoGenerator {
         assignment.addStringProperty("key");
         
         Entity installation = schema.addEntity("Installation");
+        installation.implementsInterface("Serializable");
         installation.addIdProperty();
         installation.addStringProperty("firstname");
         installation.addStringProperty("lastname");
@@ -70,10 +72,12 @@ public class ExampleDaoGenerator {
         
         Entity survey = schema.addEntity("Survey");
         survey.addIdProperty();
+        survey.implementsInterface("Serializable");
         survey.addStringProperty("survey_title");
         
         Entity photo = schema.addEntity("Photo");
         photo.addIdProperty();
+        photo.implementsInterface("Serializable");
         photo.addStringProperty("title");
         Property photoToSuvey = photo.addLongProperty("surveyId").getProperty();
         photo.addToOne(survey, photoToSuvey);
@@ -83,6 +87,7 @@ public class ExampleDaoGenerator {
         
         Entity group = schema.addEntity("Group");
         group.setTableName("GROUPDB");
+        group.implementsInterface("Serializable");
         group.addIdProperty();
         group.addStringProperty("group_title");
         Property surveyId = group.addLongProperty("surveyId").getProperty();
@@ -92,6 +97,7 @@ public class ExampleDaoGenerator {
         surveyToGroups.setName("groups");
         
         Entity question = schema.addEntity("Question");
+        question.implementsInterface("Serializable");
         question.addIdProperty();
         question.addStringProperty("alert_type");
         question.addStringProperty("question");
@@ -114,6 +120,7 @@ public class ExampleDaoGenerator {
         groupToQuestions.setName("questions");
         
         Entity surveyResponse = schema.addEntity("SurveyResponse");
+        surveyResponse.implementsInterface("Serializable");
         surveyResponse.addIdProperty();
         surveyResponse.addStringProperty("alert_type");
         
@@ -123,7 +130,9 @@ public class ExampleDaoGenerator {
         groupDB.addStringProperty("title");
         
         Entity project = schema.addEntity("Project");
+        project.implementsInterface("Serializable");
         project.addIdProperty();
+        project.addStringProperty("key");
         project.addStringProperty("project_id");
         project.addStringProperty("project_custom_id");
         project.addStringProperty("project_name");
@@ -139,6 +148,7 @@ public class ExampleDaoGenerator {
         project.addStringProperty("client_id");
         
         Entity completionCode = schema.addEntity("CompletionCode");
+        completionCode.implementsInterface("Serializable");
         completionCode.addIdProperty();
         completionCode.addLongProperty("surveyId");
         completionCode.addStringProperty("completion_code_id");
@@ -146,7 +156,82 @@ public class ExampleDaoGenerator {
         completionCode.addStringProperty("completion_code_name");
         completionCode.addStringProperty("completion_code_percentage");
         
-        
+        Entity clientItem = schema.addEntity("ClientItem");
+        clientItem.implementsInterface("Serializable");
+        clientItem.addIdProperty();
+	    clientItem.addStringProperty("business_name");
+	    clientItem.addStringProperty("project");
+	    
+	    Entity location = schema.addEntity("LocationItem");
+	    location.implementsInterface("Serializable");
+	    location.addStringProperty("key");
+	    location.addIdProperty();
+	    location.addStringProperty("location_id");
+	    location.addStringProperty("location_name");
+	    
+	    Entity activity = schema.addEntity("ActivityItem");
+	    activity.implementsInterface("Serializable");
+	    activity.addStringProperty("key");
+	    activity.addIdProperty();
+	    activity.addStringProperty("activity_type_id");
+	    activity.addStringProperty("activity_type_name");
+	    
+	    Entity calendar = schema.addEntity("CalendarEvent");
+	    calendar.implementsInterface("Serializable");
+	    calendar.addIdProperty();
+	    calendar.addStringProperty("event_id");
+	    calendar.addStringProperty("event_start");
+	    calendar.addStringProperty("event_end");
+	    calendar.addStringProperty("event_text");
+	    calendar.addStringProperty("event_type");
+	    calendar.addStringProperty("event_minutes");
+	    calendar.addStringProperty("event_title");
+	    
+	    Entity event = schema.addEntity("Event");
+	    event.implementsInterface("Serializable");
+	    event.addIdProperty();
+	    event.addStringProperty("activity_type_id");
+	    event.addStringProperty("project_name_id");
+	    event.addStringProperty("project_title");
+	    event.addStringProperty("client_id");
+	    event.addStringProperty("location_id");
+	    event.addStringProperty("q_diary_start");
+	    event.addStringProperty("q_diary_start_date");
+	    event.addStringProperty("q_diary_end");
+	    event.addStringProperty("q_diary_minutes");
+	    event.addStringProperty("q_diary_notes");
+	    event.addStringProperty("q_diary_expenses");
+	    event.addStringProperty("q_diary_gps");
+	    
+	    Entity folder = schema.addEntity("Folder");
+	    folder.implementsInterface("Serializable");
+	    folder.addIdProperty();
+	    folder.addStringProperty("folder_id");
+	    folder.addStringProperty("folder_name");
+	    folder.addStringProperty("folder_last_modified");
+	    folder.addStringProperty("folder_created_date");
+	    folder.addStringProperty("created_by_full_name");
+	    folder.addStringProperty("modified_by_full_name");
+	    
+
+	    Entity folderItem = schema.addEntity("FolderItem");
+	    folderItem.implementsInterface("Serializable");
+	    folderItem.addIdProperty();
+	    folderItem.addStringProperty("folder_id");
+	    folderItem.addStringProperty("file_id");
+	    folderItem.addStringProperty("folder_name");
+	    folderItem.addStringProperty("file_token");
+	    folderItem.addStringProperty("file_name");
+	    folderItem.addStringProperty("file_size");
+	    folderItem.addStringProperty("created_date");
+	    folderItem.addStringProperty("file_modified_date");
+	    folderItem.addStringProperty("file_created_date");
+	    folderItem.addStringProperty("created_by_full_name");
+	    folderItem.addStringProperty("modified_by_full_name");
+	    folderItem.addStringProperty("link");
+	    folderItem.addStringProperty("file_filename");
+	   	
+	    
     }
 
 }
