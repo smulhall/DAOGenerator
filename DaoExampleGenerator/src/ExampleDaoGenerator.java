@@ -190,6 +190,8 @@ public class ExampleDaoGenerator {
 	    Entity event = schema.addEntity("Event");
 	    event.implementsInterface("Serializable");
 	    event.addIdProperty();
+	    event.addStringProperty("q_diary_id");
+	    event.addStringProperty("user_id");
 	    event.addStringProperty("activity_type_id");
 	    event.addStringProperty("project_name_id");
 	    event.addStringProperty("project_title");
