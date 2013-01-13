@@ -48,6 +48,7 @@ public class ExampleDaoGenerator {
         assignment.addIntProperty("survey_id");
         assignment.addStringProperty("additional_comments");
         assignment.addStringProperty("key");
+        assignment.addBooleanProperty("submitted");
         
         Entity installation = schema.addEntity("Installation");
         installation.implementsInterface("Serializable");
@@ -232,7 +233,23 @@ public class ExampleDaoGenerator {
 	    folderItem.addStringProperty("modified_by_full_name");
 	    folderItem.addStringProperty("link");
 	    folderItem.addStringProperty("file_filename");
-	   	
+	    
+	    Entity queueItem = schema.addEntity("QueueItem");
+	    queueItem.addIdProperty();
+	    queueItem.addStringProperty("key");
+	    queueItem.addStringProperty("API");
+	    queueItem.addLongProperty("ItemID");
+	    
+	    Entity mediaQueue = schema.addEntity("MediaQueue");
+	    mediaQueue.addIdProperty();
+	    mediaQueue.addStringProperty("URL");
+	    mediaQueue.addStringProperty("MEDIA");
+	    mediaQueue.addStringProperty("MEDIA_URL");
+	    mediaQueue.addLongProperty("SURVEY");
+	    
+	    Entity surveyQueue = schema.addEntity("SurveyQueue");
+	    surveyQueue.addIdProperty();
+	    surveyQueue.addLongProperty("RESPONSE");   	
 	    
     }
 
