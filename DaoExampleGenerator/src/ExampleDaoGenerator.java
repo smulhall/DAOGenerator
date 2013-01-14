@@ -124,6 +124,55 @@ public class ExampleDaoGenerator {
         surveyResponse.implementsInterface("Serializable");
         surveyResponse.addIdProperty();
         surveyResponse.addStringProperty("alert_type");
+        surveyResponse.addStringProperty("assignment_id");
+        surveyResponse.addStringProperty("api_key");
+        surveyResponse.addStringProperty("survey_id");
+        surveyResponse.addStringProperty("survey_started_datetime");
+        surveyResponse.addStringProperty("survey_ended_datetime");
+        surveyResponse.addStringProperty("survey_started_gps");
+        surveyResponse.addStringProperty("survey_ended_gps");
+        surveyResponse.addStringProperty("completion_code_id");
+        surveyResponse.addStringProperty("photos");
+        surveyResponse.addStringProperty("videos");      
+        
+        Entity answer = schema.addEntity("Answer");
+        answer.implementsInterface("Serializable");
+        answer.addIdProperty();
+        answer.addStringProperty("question_id");
+        answer.addStringProperty("answer");
+        answer.addStringProperty("comments");
+        Property responseId = answer.addLongProperty("responseId").getProperty();
+        answer.addToOne(surveyResponse, responseId);      
+        
+        ToMany answerToResponse = surveyResponse.addToMany(answer, responseId);
+        answerToResponse.setName("survey_answers");
+        
+        Entity unScheduledSurveyResponse = schema.addEntity("UnScheduledSurveyResponse");
+        unScheduledSurveyResponse.implementsInterface("Serializable");
+        unScheduledSurveyResponse.addIdProperty();
+        unScheduledSurveyResponse.addStringProperty("alert_type");
+        unScheduledSurveyResponse.addStringProperty("assignment_id");
+        unScheduledSurveyResponse.addStringProperty("api_key");
+        unScheduledSurveyResponse.addStringProperty("survey_id");
+        unScheduledSurveyResponse.addStringProperty("survey_started_datetime");
+        unScheduledSurveyResponse.addStringProperty("survey_ended_datetime");
+        unScheduledSurveyResponse.addStringProperty("survey_started_gps");
+        unScheduledSurveyResponse.addStringProperty("survey_ended_gps");
+        unScheduledSurveyResponse.addStringProperty("completion_code_id");
+        unScheduledSurveyResponse.addStringProperty("photos");
+        unScheduledSurveyResponse.addStringProperty("videos");      
+        
+        unScheduledSurveyResponse.addStringProperty("client");
+        unScheduledSurveyResponse.addStringProperty("project");
+        unScheduledSurveyResponse.addStringProperty("job_type");
+        unScheduledSurveyResponse.addStringProperty("location");
+        
+        Property unresponseId = answer.addLongProperty("unresponseId").getProperty();
+        answer.addToOne(unScheduledSurveyResponse, unresponseId);     
+        
+        ToMany answerToUnResponse = unScheduledSurveyResponse.addToMany(answer, unresponseId);
+        answerToUnResponse.setName("survey_answers");
+        
         
         Entity groupDB = schema.addEntity("GroupDB");
         groupDB.addIdProperty();
