@@ -75,6 +75,8 @@ public class ExampleDaoGenerator {
         survey.addIdProperty();
         survey.implementsInterface("Serializable");
         survey.addStringProperty("survey_title");
+        survey.addLongProperty("offset");
+        survey.addLongProperty("original");
         
         Entity photo = schema.addEntity("Photo");
         photo.addIdProperty();
@@ -127,6 +129,7 @@ public class ExampleDaoGenerator {
         surveyResponse.addStringProperty("assignment_id");
         surveyResponse.addStringProperty("api_key");
         surveyResponse.addStringProperty("survey_id");
+        surveyResponse.addStringProperty("offset");
         surveyResponse.addStringProperty("survey_started_datetime");
         surveyResponse.addStringProperty("survey_ended_datetime");
         surveyResponse.addStringProperty("survey_started_gps");
@@ -154,6 +157,7 @@ public class ExampleDaoGenerator {
         unScheduledSurveyResponse.addStringProperty("assignment_id");
         unScheduledSurveyResponse.addStringProperty("api_key");
         unScheduledSurveyResponse.addStringProperty("survey_id");
+        unScheduledSurveyResponse.addStringProperty("offset");
         unScheduledSurveyResponse.addStringProperty("survey_started_datetime");
         unScheduledSurveyResponse.addStringProperty("survey_ended_datetime");
         unScheduledSurveyResponse.addStringProperty("survey_started_gps");
@@ -243,8 +247,7 @@ public class ExampleDaoGenerator {
 	    event.addStringProperty("q_diary_id");
 	    event.addStringProperty("user_id");
 	    event.addStringProperty("activity_type_id");
-	    event.addStringProperty("project_name_id");
-	    event.addStringProperty("project_title");
+	    event.addStringProperty("project_id");
 	    event.addStringProperty("client_id");
 	    event.addStringProperty("location_id");
 	    event.addStringProperty("q_diary_start");
@@ -253,7 +256,8 @@ public class ExampleDaoGenerator {
 	    event.addStringProperty("q_diary_minutes");
 	    event.addStringProperty("q_diary_notes");
 	    event.addStringProperty("q_diary_expenses");
-	    event.addStringProperty("q_diary_gps");
+	    event.addStringProperty("q_diary_gps_lat");
+	    event.addStringProperty("q_diary_gps_lon");
 	    
 	    Entity folder = schema.addEntity("Folder");
 	    folder.implementsInterface("Serializable");
