@@ -60,6 +60,8 @@ public class ExampleDaoGenerator {
         installation.addStringProperty("city");
         installation.addStringProperty("country");
         installation.addStringProperty("postcode");
+        installation.addStringProperty("telephone");
+        installation.addStringProperty("mobile");
         installation.addStringProperty("gps_latitude");
         installation.addStringProperty("gps_longitude");
         installation.addStringProperty("account");
