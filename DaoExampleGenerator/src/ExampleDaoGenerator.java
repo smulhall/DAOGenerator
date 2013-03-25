@@ -35,7 +35,7 @@ public class ExampleDaoGenerator {
 
         addAssignment(schema);
 
-        new DaoGenerator().generateAll(schema, "/home/stephen/git/DAOGenerator/DaoExampleGenerator/src-gen");
+        new DaoGenerator().generateAll(schema, "/home/fergal/git/DAOGenerator/DaoExampleGenerator/src-gen");
     }
 
     private static void addAssignment(Schema schema) {
@@ -172,6 +172,7 @@ public class ExampleDaoGenerator {
         unScheduledSurveyResponse.addStringProperty("project");
         unScheduledSurveyResponse.addStringProperty("job_type");
         unScheduledSurveyResponse.addStringProperty("location");
+        unScheduledSurveyResponse.addStringProperty("work_id");
         
         Property unresponseId = answer.addLongProperty("unresponseId").getProperty();
         answer.addToOne(unScheduledSurveyResponse, unresponseId);     
@@ -202,6 +203,7 @@ public class ExampleDaoGenerator {
         project.addStringProperty("survey_ids");
         project.addStringProperty("activity_type_id");
         project.addStringProperty("client_id");
+        project.addStringProperty("work_ids");
         
         Entity completionCode = schema.addEntity("CompletionCode");
         completionCode.implementsInterface("Serializable");
