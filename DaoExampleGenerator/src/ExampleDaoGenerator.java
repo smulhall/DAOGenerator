@@ -79,6 +79,8 @@ public class ExampleDaoGenerator {
         survey.addStringProperty("survey_title");
         survey.addLongProperty("offset");
         survey.addLongProperty("original");
+        survey.addBooleanProperty("inQueue");
+        survey.addBooleanProperty("inProgress").index();
         
         Entity photo = schema.addEntity("Photo");
         photo.addIdProperty();
@@ -298,9 +300,9 @@ public class ExampleDaoGenerator {
 	    
 	    Entity queueItem = schema.addEntity("QueueItem");
 	    queueItem.addIdProperty();
-	    queueItem.addStringProperty("key");
-	    queueItem.addStringProperty("type");
-	    queueItem.addLongProperty("itemId");
+	    queueItem.addStringProperty("queueName").index();
+	    queueItem.addStringProperty("type").index();
+	    queueItem.addLongProperty("itemId").index();
 	    
 	    Entity mediaQueue = schema.addEntity("Media");
 	    mediaQueue.addIdProperty();
