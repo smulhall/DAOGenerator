@@ -35,7 +35,7 @@ public class ExampleDaoGenerator {
 
         addAssignment(schema);
 
-        new DaoGenerator().generateAll(schema, "/home/fergal/git/DAOGenerator/DaoExampleGenerator/src-gen");
+        new DaoGenerator().generateAll(schema, "src-gen");
     }
 
     private static void addAssignment(Schema schema) {
@@ -84,6 +84,7 @@ public class ExampleDaoGenerator {
         photo.addIdProperty();
         photo.implementsInterface("Serializable");
         photo.addStringProperty("title");
+        photo.addStringProperty("path");
         Property photoToSuvey = photo.addLongProperty("surveyId").getProperty();
         photo.addToOne(survey, photoToSuvey);
         
@@ -107,12 +108,12 @@ public class ExampleDaoGenerator {
         question.addStringProperty("alert_type");
         question.addStringProperty("question");
         question.addStringProperty("answer_type");
-        question.addBooleanProperty("multiple_choice");
-        question.addBooleanProperty("required");
+        question.addIntProperty("multiple_choice");
+        question.addIntProperty("required");
         question.addStringProperty("answer_options");
-        question.addBooleanProperty("requires_photo");
+        question.addIntProperty("requires_photo");
         question.addBooleanProperty("send");
-        question.addBooleanProperty("requires_comments");
+        question.addIntProperty("requires_comments");
         question.addStringProperty("answer");
         question.addStringProperty("comments");
         question.addStringProperty("image");
@@ -126,6 +127,7 @@ public class ExampleDaoGenerator {
         
         Entity surveyResponse = schema.addEntity("SurveyResponse");
         surveyResponse.implementsInterface("Serializable");
+        surveyResponse.implementsInterface("IResponse");
         surveyResponse.addIdProperty();
         surveyResponse.addStringProperty("alert_type");
         surveyResponse.addStringProperty("assignment_id");
@@ -138,7 +140,8 @@ public class ExampleDaoGenerator {
         surveyResponse.addStringProperty("survey_ended_gps");
         surveyResponse.addStringProperty("completion_code_id");
         surveyResponse.addStringProperty("photos");
-        surveyResponse.addStringProperty("videos");      
+        surveyResponse.addStringProperty("videos");
+        surveyResponse.addStringProperty("queue");
         
         Entity answer = schema.addEntity("Answer");
         answer.implementsInterface("Serializable");
@@ -154,6 +157,7 @@ public class ExampleDaoGenerator {
         
         Entity unScheduledSurveyResponse = schema.addEntity("UnScheduledSurveyResponse");
         unScheduledSurveyResponse.implementsInterface("Serializable");
+        unScheduledSurveyResponse.implementsInterface("IResponse");
         unScheduledSurveyResponse.addIdProperty();
         unScheduledSurveyResponse.addStringProperty("alert_type");
         unScheduledSurveyResponse.addStringProperty("assignment_id");
@@ -166,7 +170,8 @@ public class ExampleDaoGenerator {
         unScheduledSurveyResponse.addStringProperty("survey_ended_gps");
         unScheduledSurveyResponse.addStringProperty("completion_code_id");
         unScheduledSurveyResponse.addStringProperty("photos");
-        unScheduledSurveyResponse.addStringProperty("videos");      
+        unScheduledSurveyResponse.addStringProperty("videos");
+        unScheduledSurveyResponse.addStringProperty("queue");
         
         unScheduledSurveyResponse.addStringProperty("client");
         unScheduledSurveyResponse.addStringProperty("project");
@@ -294,15 +299,14 @@ public class ExampleDaoGenerator {
 	    Entity queueItem = schema.addEntity("QueueItem");
 	    queueItem.addIdProperty();
 	    queueItem.addStringProperty("key");
-	    queueItem.addStringProperty("API");
-	    queueItem.addLongProperty("ItemID");
+	    queueItem.addStringProperty("type");
+	    queueItem.addLongProperty("itemId");
 	    
-	    Entity mediaQueue = schema.addEntity("MediaQueue");
+	    Entity mediaQueue = schema.addEntity("Media");
 	    mediaQueue.addIdProperty();
-	    mediaQueue.addStringProperty("URL");
-	    mediaQueue.addStringProperty("MEDIA");
-	    mediaQueue.addStringProperty("MEDIA_URL");
-	    mediaQueue.addLongProperty("SURVEY");
+	    mediaQueue.addStringProperty("title");
+	    mediaQueue.addStringProperty("path");
+	    mediaQueue.addLongProperty("survey");
 	    
 	    Entity surveyQueue = schema.addEntity("SurveyQueue");
 	    surveyQueue.addIdProperty();
