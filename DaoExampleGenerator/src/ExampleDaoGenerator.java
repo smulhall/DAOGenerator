@@ -49,6 +49,8 @@ public class ExampleDaoGenerator {
         assignment.addStringProperty("additional_comments");
         assignment.addStringProperty("key");
         assignment.addBooleanProperty("submitted");
+        assignment.addLongProperty("assignment_order");
+        assignment.addStringProperty("type");
         
         Entity installation = schema.addEntity("Installation");
         installation.implementsInterface("Serializable");
@@ -67,6 +69,8 @@ public class ExampleDaoGenerator {
         installation.addStringProperty("account");
         installation.addStringProperty("appt_engineer");
         installation.addStringProperty("additional_comments");
+        installation.addStringProperty("type");
+        installation.addStringProperty("status");
         
         Property installationId = assignment.addLongProperty("installationId").getProperty();
         assignment.addToOne(installation, installationId);
@@ -233,6 +237,7 @@ public class ExampleDaoGenerator {
 	    location.addIdProperty();
 	    location.addStringProperty("location_id");
 	    location.addStringProperty("location_name");
+	    location.addStringProperty("project");
 	    
 	    Entity activity = schema.addEntity("ActivityItem");
 	    activity.implementsInterface("Serializable");
@@ -240,6 +245,7 @@ public class ExampleDaoGenerator {
 	    activity.addIdProperty();
 	    activity.addStringProperty("activity_type_id");
 	    activity.addStringProperty("activity_type_name");
+	    activity.addStringProperty("project");
 	    
 	    Entity calendar = schema.addEntity("CalendarEvent");
 	    calendar.implementsInterface("Serializable");
